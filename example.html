@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="vector_quantization.js"></script>
+</head>
+<body>
+
+<div class="image_settings">
+    upload image<br/> <input id="image_url" type="file">
+    <input type="button"  value="Load" id ='load'>
+</div>
+<canvas id="myCanvas1"></canvas>
+<canvas id="myCanvas2"></canvas>
+
+<script>
+    $( document ).ready(function() {
+        var baseCanvas = $('#myCanvas1')[0];
+        var newCanvas = $('#myCanvas2')[0];
+
+        $('#load').click(function(){
+
+            var img = new Image();
+            var img_file = $('#image_url')[0].files[0];
+            var reader = new FileReader();
+            reader.onload = function(e){
+                img.src = e.target.result;
+                baseCanvas.width = img.width;
+                baseCanvas.height = img.height;
+
+                newCanvas.width = img.width;
+                newCanvas.height = img.height;
+
+                imgToDice(img,baseCanvas,newCanvas);
+
+            }
+            reader.readAsDataURL(img_file);
+           // cx.drawImage(img,10,10,img.width,img.height);
+        });
+
+});
+
+</script>
+
+</body>
+</html>
